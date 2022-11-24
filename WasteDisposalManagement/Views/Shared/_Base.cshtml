@@ -1,0 +1,89 @@
+﻿@using Microsoft.AspNetCore.Identity;
+
+
+@*@inject UserManager<User> customUserManager
+@{
+    var userid = customUserManager.GetUserId(User);
+    var user = await customUserManager.FindByIdAsync(userid);
+}*@
+
+
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - WasteDisposalManagement</title>
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav>
+            <a asp-controller="Home" asp-action="Index" class="nav-link"><img src="~/images/interswitch_logo.svg" alt="home-logo" id="home-logo"></a>
+            <a class="toggle-button">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </a>
+        @if (User.Identity.IsAuthenticated)
+            {
+                <div class="navbar-links">
+                    <ul id="mobile-nav" class="active hide">
+                    @*<li>@user.FirstName @user.LastName </li>*@
+                    <li><partial name="_LoginPartial"></partial></li>
+                    </ul>
+                </div>
+            }
+            else{
+                <div class="navbar-links">
+                    <ul id="mobile-nav" class="active hide">
+                        <li><a asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
+                        <li><a asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a></li>
+                        <li><partial name="_LoginPartial"></partial></li>
+                    </ul>
+                </div>
+            }
+        </nav>
+
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <!-- Footer section -->
+        <footer>
+            <!-- Social accounts - Fixed to the right -->
+            <div class="socials">
+                <a href="https://twitter.com/yungelda" target="_blank">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+
+                <a href="https://linkedin.com/in/aayobam" target="_blank">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="https://api.whatsapp.com/send?phone=2347038708047" target="_blank">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+            </div>
+
+            <p><b>Email:</b> aayobam@gmail.com</p>
+            <p><b>Phone No:</b> +2347038708047</p>
+            <p class="copy">&copy; Copyright 2022</p>
+            <p class="copy">Built by Abayomi Olowu</p>
+        </footer>
+
+        <!-- Website scripts -->
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+        <!-- Ion icons scripts -->
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        @await RenderSectionAsync("Scripts", required: false)
+    </body>
+</html>

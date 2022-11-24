@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model Service
+@inject UserManager<User> customUserManager
+
+
+@{
+    var userid = customUserManager.GetUserId(User);
+    var user = await customUserManager.FindByIdAsync(userid);
+}
+@{
+    Layout = "_Base";
+}
+@{
+    ViewBag.Title = "Process Order";
+}
+
+
+
+<div class="order-container">
+    <div class="head">
+        <img src="~/images/interswitch_logo.svg" alt="an image here" srcset="">
+        <div class="order-data">
+            <p>@Model.Name</p>
+            <p>@user.FirstName @user.LastName</p>
+        </div>
+    </div>
+    <hr>
+    <div class="surchage">
+        <p>₦ @Model.Price</p>
+        <p>surcharge ₦00.00</p>
+    </div>
+
+    <form asp-controller="Order" asp-action="ProcessOrder" method="post" enctype="multipart/form-data">
+        <input type="text" name="card-number" id="card-number" placeholder="Card Number"><br>
+
+        <input type="text" name="expiry-date" id="expiry-date" placeholder="Expiry date (MM / YY)"><br>
+
+        <input type="text" name="cvv" id="cvv" placeholder="CVV"><br>
+
+        <input type="text" name="cvv" id="cvv" placeholder="PIN"><br>
+        <input type="submit" id="payment-btn" value="Make Payment"><br>
+    </form>
+</div>

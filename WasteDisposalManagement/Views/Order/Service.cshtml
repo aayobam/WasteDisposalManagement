@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Service>
+
+@{
+    Layout = "_Base";
+}
+
+@{
+    ViewBag.Title = "Our Services";
+}
+
+
+<h1>Our Services</h1>
+<div class="service-order-cards">
+    <div class="service-card">
+        <p>Register an account.</p>
+        <p>Make one time payment of ₦10,000 to get 1 waste bin or container.</p>
+        <p>Gain access to 1 month free service from us company on our first operation in your area.</p>
+        <p>Weekly access to disposing wastes on payment confirmation.</p>
+        <a asp-controller="Order" asp-action="ProcessOrder">Select Service</a>
+    </div>
+</div>
+
+@foreach(var item in Model)
+{
+    <div class="service-order-cards">
+        @if (item.Name == "First Time Subscriber")
+        {
+            <div class="service-card">
+                <h4>Service Type: @item.Name</h4>
+                <p>Service Price: @item.Price</p>
+                <p>Service Duration(Days): @item.DurationInDays</p>
+                <a asp-controller="Order" asp-action="ProcessOrder">Select Service</a>
+            </div>
+        }
+
+        else if (item.Name == "Residential")
+        {
+            <div class="service-card">
+                <h4>Service Type: @item.Name</h4>
+                <p>Service Price: @item.Price</p>
+                <p>Service Duration(Days): @item.DurationInDays</p>
+                <a asp-controller="Order" asp-action="ProcessOrder">Select Service</a>
+            </div>
+        }
+    </div>
+}

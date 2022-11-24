@@ -1,0 +1,70 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject UserManager<User> customUserManager
+@{
+    ViewBag.Title = "My Profile";
+    Layout = "_Dashboard";
+}
+
+@{
+    var userid = customUserManager.GetUserId(User);
+    var user = await customUserManager.FindByIdAsync(userid);
+}
+
+<section class="user-profile">
+
+    <div class="profile-details-card">
+        @if(user.ProfilePicture != null)
+        {
+            <img class="profile-picture" src="@user.ProfilePicture" alt="user profile image">
+        }
+        else
+        {
+            <img class="profile-picture" src="~/images/dummy-profile-pic.jpg" alt="user profile image">
+        }
+
+        <br>
+        <h4>Profile Information</h4><hr>
+        <div class="profile-details">
+            <p><label for="fullname">Full Name:</label> @user.FirstName @user.LastName</p>
+            <p><label for="email">Email:</label> @user.Email</p>
+            <p><label for="email">Phone No:</label> @user.PhoneNumber</p>
+            <p><label for="email">Address:</label> @user.Address</p>
+            <p><label for="email">City:</label> @user.City</p>
+            <p><label for="email">State:</label> @user.State</p>
+        </div><br>
+    </div>
+
+    <div class="profile-update">
+
+        <div class="update-guide">
+            <h4>Update your profile.</h4>
+        </div>
+
+        <form action="update.html" method="post" enctype="multipart/form-data">
+
+            <input type="text" name="fname" id="fname" placeholder="Test" required><br>
+
+            <input type="text" name="lname" id="lname" placeholder="User" required><br>
+
+            <input type="phone" name="phone-no" id="phone-no" placeholder="+234xxxxxxxxxx" required><br>
+
+            <input type="text" name="address" id="address" placeholder="15 interswitch street." required><br>
+
+            <select name="city" id="city">
+                <option value="">Igando</option>
+                <option value="">Ikotun</option>
+                <option value="">Abaranje</option>
+            </select><br>
+
+            <select name="state" id="state" disabled="disabled">
+                <option value="">Lagos</option>
+            </select><br>
+
+            <div class="profile-image">
+                <input id="profile-image" type="file" src="" alt="profile image">
+            </div>
+
+            <input type="submit" value="Update Profile" id="update-btn" name="update-btn">
+        </form>
+    </div>
+</section>

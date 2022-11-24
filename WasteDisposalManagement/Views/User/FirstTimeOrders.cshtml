@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WasteDisposalManagement.Models.FirstTimeOrder>
+@{
+    ViewBag.Title = "Users Lists";
+    Layout = "_Dashboard";
+}
+
+<div class="board">
+    <table class="table" width="100%">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>USERID</td>
+                <td>STATUS STATUS</td>
+                <td>PAYMENT STATUS</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="users">
+                        <p>@item.OrderId </p>
+                    </td>
+
+                    <td class="status">
+                        <p>@item.UserId</p>
+                    </td>
+
+                    <td class="role">
+                        <p>@item.OrderStatus</p>
+                    </td>
+
+                    <td class="role">
+                        <p>@item.PaymentStatus</p>
+                    </td>
+
+                    <td class="edit">
+                        <a href="#">Edit</a>
+                    </td>
+
+                    <td class="delete">
+                        <a href="#">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
