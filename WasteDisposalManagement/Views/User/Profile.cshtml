@@ -34,34 +34,35 @@
         </div><br>
     </div>
 
-    <div class="profile-update">
 
+    <div class="profile-update">
         <div class="update-guide">
             <h4>Update your profile.</h4>
         </div>
 
-        <form action="update.html" method="post" enctype="multipart/form-data">
+        <form asp-controller="User" asp-action="UpdateProfile" enctype="multipart/form-data">
 
-            <input type="text" name="fname" id="fname" placeholder="Test" required><br>
+            <input asp-for="@user.FirstName" id="fname"><br>
 
-            <input type="text" name="lname" id="lname" placeholder="User" required><br>
+            <input asp-for="@user.LastName" id="lname"><br>
 
-            <input type="phone" name="phone-no" id="phone-no" placeholder="+234xxxxxxxxxx" required><br>
+            <input asp-for="@user.PhoneNumber" id="phone-no"><br>
 
-            <input type="text" name="address" id="address" placeholder="15 interswitch street." required><br>
+            <input asp-for="@user.Address" id="address"><br>
 
-            <select name="city" id="city">
-                <option value="">Igando</option>
-                <option value="">Ikotun</option>
-                <option value="">Abaranje</option>
+            <select asp-for="@user.City" id="city">
+                <option value="Igando">Igando</option>
+                <option value="Ikotun">Ikotun</option>
+                <option value="Abaranje">Abaranje</option>
             </select><br>
 
-            <select name="state" id="state" disabled="disabled">
+            <select asp-for="@user.State" id="state" disabled="disabled">
                 <option value="">Lagos</option>
             </select><br>
 
             <div class="profile-image">
-                <input id="profile-image" type="file" src="" alt="profile image">
+                <input id="profile-image" type="file" accept=".png, .jpg, .jpeg" src="@user.ProfilePicture." alt="profile image">
+               <span asp-validation-for="@user.ProfilePicture"></span>
             </div>
 
             <input type="submit" value="Update Profile" id="update-btn" name="update-btn">

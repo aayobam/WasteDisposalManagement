@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Linq;
 using WasteDisposalManagement.Models;
 
@@ -17,11 +18,43 @@ namespace WasteDisposalManagement.Controllers
 
         public IActionResult Dashboard()
         {
-            return RedirectToAction("Orders");
+            return View("Orders");
         }
 
-        public IActionResult Profile() {
-            return View();
+        public IActionResult Profile(User user)
+        {
+           return View(user);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfile(string id, UpdateUser userObj)
+        {
+            User user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                user.FirstName = userObj.FirstName;
+                user.LastName = userObj.LastName;
+                user.PhoneNumber = userObj.PhoneNumber;
+                user.Address = userObj.Address;
+                user.City = userObj.City;
+                user.State = userObj.State;
+                user.ProfilePicture = userObj.ProfilePicture;
+                IdentityResult result = await _userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    ViewBag.status = "Profile updated succesful";
+                    return RedirectToAction("Profile", "User");
+                }
+                else
+                {
+
+                    ViewBag.status = "Unable to update user data";
+                    return View(user);
+                }
+            }
+            ViewBag.status = "Profile not found.";
+            return View("Profile");
         }
 
         public IActionResult Orders()

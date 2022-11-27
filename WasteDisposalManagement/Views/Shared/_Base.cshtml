@@ -1,11 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 
 
-@*@inject UserManager<User> customUserManager
+@inject UserManager<User> customUserManager
 @{
     var userid = customUserManager.GetUserId(User);
     var user = await customUserManager.FindByIdAsync(userid);
-}*@
+}
 
 
 <!DOCTYPE html>

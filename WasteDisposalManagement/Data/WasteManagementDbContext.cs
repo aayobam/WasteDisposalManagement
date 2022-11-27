@@ -15,12 +15,12 @@ public partial class WasteManagementDbContext : IdentityDbContext<User>
     {
     }
 
-    public DbSet<Card> Cards { get; set; }
+    public DbSet<Card>? Cards { get; set; }
 
-    public DbSet<FirstTimeOrder> FirstTimeOrders { get; set; }
+    public DbSet<FirstTimeOrder>? FirstTimeOrders { get; set; }
 
-    public DbSet<Order> Orders { get; set; }
+    public DbSet<Order>? Orders { get; set; }
 
-    public DbSet<Service> Services { get; set; }
-    public IEnumerable<User> Users { get; internal set; }
+    public DbSet<Service>? Services { get; set; }
+    public IEnumerable<User> Users { get; set; }
 }

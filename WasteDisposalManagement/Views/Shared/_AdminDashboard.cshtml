@@ -43,18 +43,18 @@
 
             <div class="profile">
                 <i class="far fa-bell"></i>
-                @if(user.ProfilePicture != null)
+                @if (user.ProfilePicture != null)
                 {
-                    <img src="@user.ProfilePicture" alt="user profile image">
+                    <a asp-controller="User" asp-action="Profile"><img src="@user.ProfilePicture" alt="user profile image"></a>
                 }
                 else
                 {
-                    <img src="~/images/dummy-profile-pic.jpg" alt="user profile image">
+                    <a asp-controller="User" asp-action="Profile"><img src="~/images/dummy-profile-pic.jpg" alt="user profile image"></a>
                 }
             </div>
         </div>
 
-        <h3 class="i-name">Dashboard</h3>
+        <h3 class="i-name">Admin Dashboard</h3>
         <div class="cards">
 
             <div class="card">

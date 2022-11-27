@@ -1,22 +1,3 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}
-
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,700&display=swap");
 
 /* Variables start*/
@@ -471,14 +452,13 @@ form #terms {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-bottom: -120px;
 }
 
-.login .column1 {
-    width: 50%;
-    padding: 2em;
-    margin-top: -100px;
-}
+    .login .column1 {
+        width: 50%;
+        padding: 2em;
+        margin-top: -100px;
+    }
 
 .column1 .login-guide {
     text-align: center;
@@ -505,11 +485,12 @@ form #login-email, #login-password, #login-btn {
     margin: 10px;
     font-weight: 700px;
     border: 1px solid #3E3C49;
+    ;
 }
 
-form #login-email:hover, #login-password:hover {
-    border-color: #3E3C49;
-}
+    form #login-email:hover, #login-password:hover {
+        border-color: #3E3C49;
+    }
 
 form #login-btn {
     width: 100%;
@@ -527,7 +508,6 @@ form #email-label, #password-label {
     color: var(--secondary-color);
     margin-top: -8px;
     font-size: 12px;
-    width: 100%;
 }
 
 .display-none {
@@ -536,20 +516,13 @@ form #email-label, #password-label {
 
 form #login-btn:hover {
     background-color: #6055A5;
-    cursor:pointer;
-}
-
-#logout{
-    cursor: pointer !important;
-}
-
-#logout:hover{
-    color: var(--secondary-color) !important;
 }
 /*end of login container*/
+
+
 /* start of user profile style */
 .user-profile {
-    width: calc(80% -176px);
+    width: 80%;
     margin: auto;
     min-height: 100vh;
     display: flex;
@@ -559,16 +532,16 @@ form #login-btn:hover {
     gap: 100px;
 }
 
-.user-profile .profile-details-card {
-    margin-top: -80px;
-    background-color: var(--alice-blue);
-    border-radius: 5px;
-    padding: 2em;
-    width: 40%;
-    align-items: flex-start;
-    justify-content: center;
-    text-align: center;
-}
+    .user-profile .profile-details-card {
+        margin-top: -80px;
+        background-color: var(--alice-blue);
+        border-radius: 5px;
+        padding: 2em;
+        width: 50%;
+        align-items: flex-start;
+        justify-content: center;
+        text-align: center;
+    }
 
 .profile-details-card .profile-details {
     display: flex;
@@ -609,11 +582,12 @@ form #fname, #lname, #phone-no, #address, #state, #city, #update-btn, #profile-i
     margin: 10px;
     font-weight: 700px;
     border: 1px solid #3E3C49;
+    ;
 }
 
-form #fname:hover, #lname:hover, #phone-no:hover, #address:hover, #state, #city:hover {
-    border-color: #3E3C49;
-}
+    form #fname:hover, #lname:hover, #phone-no:hover, #address:hover, #state, #city:hover {
+        border-color: #3E3C49;
+    }
 
 .profile-picture {
     width: 90%;
@@ -632,9 +606,9 @@ form #update-btn {
     cursor: pointer;
 }
 
-form #update-btn:hover {
-    background-color: #6055A5;
-}
+    form #update-btn:hover {
+        background-color: #6055A5;
+    }
 
 
 @media only screen and (max-width:1029.33px) {
@@ -649,9 +623,9 @@ form #update-btn:hover {
         display: flex;
     }
 
-    .user-profile .profile-details-card {
-        margin-top: -150px;
-    }
+        .user-profile .profile-details-card {
+            margin-top: -150px;
+        }
 }
 
 @media only screen and (max-width:700px) {
@@ -659,14 +633,14 @@ form #update-btn:hover {
         flex-direction: column;
     }
 
-    .user-profile .profile-details-card {
-        margin-top: 20px;
-        width: 80%;
-    }
+        .user-profile .profile-details-card {
+            margin-top: 20px;
+            width: 80%;
+        }
 
-    .user-profile .profile-update {
-        width: 90%;
-    }
+        .user-profile .profile-update {
+            width: 90%;
+        }
 }
 
 @media only screen and (max-width:450px) {
@@ -684,16 +658,15 @@ footer {
     text-align: center;
     margin: 2rem 0 0;
     color: var(--primary-white);
-    margin-bottom: -80px;
 }
 
-footer .socials {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    display: inline-block;
-    justify-content: center;
-}
+    footer .socials {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        display: inline-block;
+        justify-content: center;
+    }
 
 .socials .fa-brands {
     font-size: 30px;
@@ -739,9 +712,9 @@ footer .socials {
         align-items: center;
     }
 
-    .navbar-links li a {
-        padding: .5rem 1rem;
-    }
+        .navbar-links li a {
+            padding: .5rem 1rem;
+        }
 
     .register {
         width: 80%;
@@ -749,12 +722,12 @@ footer .socials {
         flex-direction: column;
     }
 
-    .register .column1 {
-        width: 100%;
-        text-align: center;
-        margin-top: 20px;
-        margin-bottom: -30px;
-    }
+        .register .column1 {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: -30px;
+        }
 
     .column1 h1 {
         margin-left: 40px;
@@ -766,6 +739,7 @@ footer .socials {
         align-items: center;
         justify-items: center;
         justify-self: center;
+        margin-top: 20px;
         margin-bottom: -30px;
     }
 
@@ -780,10 +754,10 @@ footer .socials {
         flex-direction: column;
     }
 
-    .login .column1 {
-        width: 100%;
-        text-align: center;
-    }
+        .login .column1 {
+            width: 100%;
+            text-align: center;
+        }
 
     .column1 h1 {
         margin-left: 40px;
@@ -833,14 +807,14 @@ footer .socials {
     display: flex;
 }
 
-.dashboard #sidebar {
-    height: 100%;
-    width: 200px;
-    background-color: var(--sidebar-color);
-    position: fixed;
-    top: 0;
-    left: 0;
-}
+    .dashboard #sidebar {
+        height: 100%;
+        width: 200px;
+        background-color: var(--sidebar-color);
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
 
 #sidebar .logo {
     display: flex;
@@ -858,34 +832,34 @@ footer .socials {
     margin-top: 40px;
 }
 
-#sidebar .items li {
-    padding: 15px;
-}
+    #sidebar .items li {
+        padding: 15px;
+    }
 
-#sidebar .items li:hover {
-    background: #3e3c49a5;
-    cursor: pointer;
-    transform: var(--transition);
-}
+        #sidebar .items li:hover {
+            background: #3e3c49a5;
+            cursor: pointer;
+            transform: var(--transition);
+        }
 
-#sidebar .items li:nth-child(1) {
-    border-left: 4px solid whitesmoke;
-}
+        #sidebar .items li:nth-child(1) {
+            border-left: 4px solid whitesmoke;
+        }
 
-#sidebar .items li i {
-    color: rgb(134, 141, 151);
-    width: 30px;
-    height: 20px;
-    line-height: 30px;
-    text-align: center;
-    font-size: 14px;
-    margin: 0 10px 0 25px;
-}
+        #sidebar .items li i {
+            color: rgb(134, 141, 151);
+            width: 30px;
+            height: 20px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 14px;
+            margin: 0 10px 0 25px;
+        }
 
-#sidebar .items li a {
-    color: #fff;
-    font-weight: 300px;
-}
+        #sidebar .items li a {
+            color: #fff;
+            font-weight: 300px;
+        }
 
 .dashboard #main {
     width: calc(100% - 200px);
@@ -1115,10 +1089,10 @@ tbody tr td {
         justify-content: flex-start;
     }
 
-    .cards .card {
-        padding: 16px 20px;
-        margin: 10px 20px 10px 0;
-    }
+        .cards .card {
+            padding: 16px 20px;
+            margin: 10px 20px 10px 0;
+        }
 }
 
 @media only screen and (max-width:746px) {

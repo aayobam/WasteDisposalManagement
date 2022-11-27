@@ -21,30 +21,20 @@ namespace WasteDisposalManagement.Controllers
             return View(serviceList);
         }
 
-        [HttpGet]
-        public IActionResult OrderDetail(int? id) {
-            if(id == 0 || id == null)
+        
+        public IActionResult Detail(int? id) {
+            if (id == 0 || id == null)
             {
-                return NotFound(); 
-            }
-            var serviceDetail = _context.Services.Find(id);
-            if(serviceDetail == null) { 
                 return NotFound();
             }
-            return View(serviceDetail);
+            var serviceObj = _context.Services.Find(id);
+            if (serviceObj == null)
+            {
+                return NotFound();
+            }
+            return View(serviceObj);
         }
 
-        /*[ValidateAntiForgeryToken]
-        [HttpPost]
-        public IActionResult ProcessOrder(Service ServiceObj)
-        {
-            if(ServiceObj == null) {
-                return NotFound();
-            }
-            _context.Orders.Add(ServiceObj);
-            _context.SaveChanges();
-            return RedirectToAction("User", "Order");
-        }*/
 
         public IActionResult PaymentSuccess()
         {
