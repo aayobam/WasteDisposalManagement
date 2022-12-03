@@ -11,7 +11,7 @@
 <!DOCTYPE html>
     <html lang="en">
     <head>
-        <meta charset="utf-8" />
+        <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>@ViewData["Title"] - WasteDisposalManagement</title>
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -30,17 +30,17 @@
             {
                 <div class="navbar-links">
                     <ul id="mobile-nav" class="active hide">
-                    @*<li>@user.FirstName @user.LastName </li>*@
+                    <li><a asp-controller="Order" asp-action="Service" class="nav-link">Services</a></li>
                     <li><partial name="_LoginPartial"></partial></li>
+                    
                     </ul>
                 </div>
             }
             else{
                 <div class="navbar-links">
                     <ul id="mobile-nav" class="active hide">
-                        <li><a asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a></li>
                         <li><partial name="_LoginPartial"></partial></li>
+                        <li><a asp-controller="Order" asp-action="Service" class="nav-link">Services</a></li>
                     </ul>
                 </div>
             }

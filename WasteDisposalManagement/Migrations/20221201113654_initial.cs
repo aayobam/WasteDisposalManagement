@@ -33,7 +33,7 @@ namespace WasteDisposalManagement.Migrations
                     ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    States = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -182,12 +182,12 @@ namespace WasteDisposalManagement.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CardNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Cvv = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Expiry = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CardBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    CardNumber = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    Cvv = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
+                    Expiry = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
+                    Pin = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
+                    CardBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -196,7 +196,8 @@ namespace WasteDisposalManagement.Migrations
                         name: "FK_Cards_AspNetUsers_UserId1",
                         column: x => x.UserId1,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -205,7 +206,7 @@ namespace WasteDisposalManagement.Migrations
                 {
                     OrderId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ServicesName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -214,8 +215,7 @@ namespace WasteDisposalManagement.Migrations
                     ReferenceNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ServicesNameNavigationServiceId = table.Column<int>(type: "int", nullable: false),
-                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    ServicesNameNavigationServiceId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -224,7 +224,8 @@ namespace WasteDisposalManagement.Migrations
                         name: "FK_FirstTimeOrders_AspNetUsers_UserId1",
                         column: x => x.UserId1,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_FirstTimeOrders_Services_ServicesNameNavigationServiceId",
                         column: x => x.ServicesNameNavigationServiceId,
@@ -239,7 +240,7 @@ namespace WasteDisposalManagement.Migrations
                 {
                     OrderId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ServicesName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -248,8 +249,7 @@ namespace WasteDisposalManagement.Migrations
                     ReferenceNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ServicesNameNavigationServiceId = table.Column<int>(type: "int", nullable: false),
-                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    ServicesNameNavigationServiceId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -258,7 +258,8 @@ namespace WasteDisposalManagement.Migrations
                         name: "FK_Orders_AspNetUsers_UserId1",
                         column: x => x.UserId1,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Orders_Services_ServicesNameNavigationServiceId",
                         column: x => x.ServicesNameNavigationServiceId,

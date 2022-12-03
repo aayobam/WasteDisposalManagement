@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 namespace WasteDisposalManagement.Models;
 
 
-public partial class WasteManagementDbContext : IdentityDbContext<User>
+public class WasteManagementDbContext : IdentityDbContext<User>
 {
     public WasteManagementDbContext()
     {
@@ -15,12 +15,12 @@ public partial class WasteManagementDbContext : IdentityDbContext<User>
     {
     }
 
-    public DbSet<Card>? Cards { get; set; }
+    public DbSet<Card> Cards { get; set; } = null!; 
 
-    public DbSet<FirstTimeOrder>? FirstTimeOrders { get; set; }
+    public DbSet<FirstTimeOrder> FirstTimeOrders { get; set; } = null!;
 
-    public DbSet<Order>? Orders { get; set; }
+    public DbSet<Order> Orders { get; set; } = null!;   
 
-    public DbSet<Service>? Services { get; set; }
-    public IEnumerable<User> Users { get; set; }
+    public DbSet<Service> Services { get; set; } = null!;
+    public IEnumerable<User> Users { get; set; } = null!;
 }

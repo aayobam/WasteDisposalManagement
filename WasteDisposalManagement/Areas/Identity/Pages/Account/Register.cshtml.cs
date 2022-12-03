@@ -25,6 +25,7 @@ namespace WasteDisposalManagement.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
+        private readonly WasteManagementDbContext _context;
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly IUserStore<User> _userStore;
@@ -37,7 +38,8 @@ namespace WasteDisposalManagement.Areas.Identity.Pages.Account
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            WasteManagementDbContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -45,6 +47,7 @@ namespace WasteDisposalManagement.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         /// <summary>
@@ -130,6 +133,17 @@ namespace WasteDisposalManagement.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            
+            //This auto generates card details and assigns to users on creation
+            //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            Random rnd = new Random();
+            string randomCardNumber = Convert.ToString(rnd.NextInt64(1111111111111111, 9999999999999999));
+            int randomPin = rnd.Next(0000,9999);
+            int randomCvv = rnd.Next(000, 999);
+            string randomExpiry = Convert.ToString(DateTime.Now.Month) + "/" + 25.ToString();
+            float randomCardBalance = rnd.Next(10000, 100000);
+          //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
             if (ModelState.IsValid)
             {
                 //var user = CreateUser();
@@ -151,6 +165,19 @@ namespace WasteDisposalManagement.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    // create a new card instance for the newly registered users for mocking sake
+                    Card cardObj = new Card()
+                    {
+                        UserId1 = user.Id.ToString(),
+                        CardNumber = randomCardNumber.ToString(),
+                        Expiry = randomExpiry,
+                        Cvv = randomCvv.ToString(),
+                        Pin = randomPin.ToString(),
+                        CardBalance = Convert.ToDecimal(randomCardBalance)
+                    };
+                    _context.Cards.Add(cardObj);
+                    _context.SaveChanges();
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

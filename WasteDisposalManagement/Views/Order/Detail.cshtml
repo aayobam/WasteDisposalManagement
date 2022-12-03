@@ -1,5 +1,5 @@
-﻿@using Microsoft.AspNetCore.Identity;
-@model Service
+﻿@model WasteDisposalManagement.Models.Service
+@using Microsoft.AspNetCore.Identity;
 @inject UserManager<User> customUserManager
 
 
@@ -7,15 +7,13 @@
     var userid = customUserManager.GetUserId(User);
     var user = await customUserManager.FindByIdAsync(userid);
 }
+
 @{
     Layout = "_Base";
 }
-@{
-    ViewBag.Title = "Process Order";
-}
 
 
-
+<div class="email-label">@ViewBag.message</div>
 <div class="order-container">
     <div class="head">
         <img src="~/images/interswitch_logo.svg" alt="an image here" srcset="">
@@ -29,15 +27,21 @@
         <p>surcharge ₦00.00</p>
     </div>
 
-    <form asp-controller="Order" asp-action="ProcessOrder" method="post" enctype="multipart/form-data">
-        <input type="hidden" value="@Model.ServiceId"></input>
-        <input type="text" name="card-number" id="card-number" placeholder="Card Number"><br>
+    <form asp-controller="Order" asp-action="Detail" method="post" enctype="multipart/form-data">
+        <input type="hidden" value="@Model.ServiceId">
+        <input type="text" id="card-number" placeholder="Card Number">
+        <span></span><br>
+        
 
-        <input type="text" name="expiry-date" id="expiry-date" placeholder="Expiry date (MM / YY)"><br>
+        <input type="text" name="expiry-date" id="expiry-date" placeholder="Expiry date (MM / YY)">
+        <span></span><br>
 
-        <input type="text" name="cvv" id="cvv" placeholder="CVV"><br>
+        <input type="text" name="cvv" id="cvv" placeholder="CVV">
+        <span></span><br>
 
-        <input type="text" name="cvv" id="cvv" placeholder="PIN"><br>
+        <input type="text" name="cvv" id="cvv" placeholder="PIN">
+        <span></span><br>
+
         <input type="submit" id="payment-btn" value="Make Payment"><br>
     </form>
 </div>

@@ -21,7 +21,7 @@
         </div>
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
                     
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" id="email-label"></div>
             <div class="form-floating">
                 <input asp-for="Input.FirstName" id="fname" autocomplete="new-firstname" placeholder="Enter Firstname" aria-required="true" />
                 <span asp-validation-for="Input.FirstName" id="email-label"></span>

@@ -1,47 +1,41 @@
-﻿@model IEnumerable<WasteDisposalManagement.Models.FirstTimeOrder>
+﻿@model IEnumerable<WasteDisposalManagement.Models.Service>
 @{
-    ViewData["Title"] = "First Time Orders";
-    Layout = "_Dashboard";
+    ViewData["Title"] = "Services";
+    Layout = "_AdminDashboard";
 }
 
 
-<h1 style="margin-bottom:-10px">First Time Orders</h1>
+<h1 style="margin-bottom:-10px">Services</h1>
 <div class="dashboard">
     <section id="main">
         <div class="board">
             <table class="table" width="100%">
                 <thead>
                     <tr>
-                        <td>ORDER ID</td>
+                        <td>SERVICE ID</td>
                         <td>SERVICE NAME</td>
-                        <td>PAYMENT STATUS</td>
-                        <td>ORDER STATUS</td>
-                        <td>REFERENCE NO</td>
-
+                        <td>SERVICE PRICE</td>
+                        <td>SERVICE DURATION(DAYS)</td>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var order in Model)
+                    @foreach (var service in Model)
                     {
                         <tr>
                             <td class="users">
-                                <p>@order.OrderId</p>
+                                <p>@service.ServiceId</p>
                             </td>
 
                             <td class="title">
-                                <p>@order.ServicesName</p>
+                                <p>@service.Name</p>
                             </td>
 
                             <td class="status">
-                                <p>@order.PaymentStatus</p>
+                                <p>#@service.Price</p>
                             </td>
 
                             <td class="role">
-                                <p>@order.ReferenceNo</p>
-                            </td>
-
-                            <td class="role">
-                                <p>@order.StartDate</p>
+                                <p>@service.DurationInDays</p>
                             </td>
 
                             <td class="edit">

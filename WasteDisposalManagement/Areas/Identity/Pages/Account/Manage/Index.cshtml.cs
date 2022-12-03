@@ -58,7 +58,30 @@ namespace WasteDisposalManagement.Areas.Identity.Pages.Account.Manage
             /// </summary>
             [Phone]
             [Display(Name = "Phone number")]
+            [Required, MaxLength(11), MinLength(11)]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "First Name"), StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 0)]
+            public string FirstName { get; set; }
+
+            [Display(Name = "Last Name"), StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 0)]
+            public string LastName { get; set; }
+
+            [EmailAddress]
+            public string EmailAddress { get; set; }
+
+
+            [Required, Display(Name = "Address"), StringLength(400, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 0)]
+            public string Address { get; set; }
+
+            [Display(Name = "City"), StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 0)]
+            public string City { get; set; }
+
+            [Display(Name = "State"), StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 0)]
+            public string State { get; set; }
+
+            public byte[] ProfilePicture { get; set; }
+            public DateTime RegistrationDate { get; set; } = DateTime.Now;
         }
 
         private async Task LoadAsync(User user)
@@ -66,11 +89,18 @@ namespace WasteDisposalManagement.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
+
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = user.PhoneNumber,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Address= user.Address,
+                City= user.City,
+                State= user.State,
+                ProfilePicture= user.ProfilePicture,
             };
         }
 
@@ -100,8 +130,16 @@ namespace WasteDisposalManagement.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            var PhoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var FirstName = user.FirstName;
+            var LastName = user.LastName;
+            var Address = user.Address;
+            var City = user.City;
+            var State = user.State;
+            var ProfilePicture = user.ProfilePicture;
+            
+
+            if (Input.PhoneNumber != PhoneNumber)
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
@@ -109,6 +147,44 @@ namespace WasteDisposalManagement.Areas.Identity.Pages.Account.Manage
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
                 }
+            }
+            if (Input.FirstName != FirstName)
+            {
+                user.FirstName = Input.FirstName;
+                await _userManager.UpdateAsync(user);
+            }
+            if (Input.LastName != LastName)
+            {
+                user.LastName = Input.LastName;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.PhoneNumber != PhoneNumber) {
+                Input.PhoneNumber=PhoneNumber;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if(Input.Address != Address)
+            {
+                user.Address = Input.Address;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.City != City) {
+                Input.City = City;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if(Input.State != State)
+            {
+                Input.State = State;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if(Input.ProfilePicture != ProfilePicture)
+            {
+                Input.ProfilePicture = ProfilePicture;
+                await _userManager.UpdateAsync(user);
             }
 
             await _signInManager.RefreshSignInAsync(user);

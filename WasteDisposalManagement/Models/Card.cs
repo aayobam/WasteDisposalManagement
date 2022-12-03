@@ -1,6 +1,7 @@
 ﻿using MessagePack;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WasteDisposalManagement.Models
 {
@@ -9,21 +10,20 @@ namespace WasteDisposalManagement.Models
         public int Id { get; set; }
 
         [Required, MaxLength(16), MinLength(12)]
-        public string? CardNumber { get; set; }
+        public string CardNumber { get; set; } = string.Empty;
 
         [Required, MaxLength(3), MinLength(3)]
-        public string? Cvv { get; set; }
+        public string Cvv { get; set; }= string.Empty;
 
         [Required, MaxLength(5), MinLength(5)]
         public string? Expiry { get; set; }
 
         [Required, MaxLength(4), MinLength(4)]
-        public int? Pin { get; set; } = 0000;
+        public string? Pin { get; set; }
+        public decimal CardBalance { get; set; }
 
-        public decimal? CardBalance { get; set; }
-
-        public int UserId { get; set; }
-
+        [ForeignKey("User")]
+        public string UserId1 { get; set; }=string.Empty;
         public virtual User User { get; set; } = null!;
     }
 }

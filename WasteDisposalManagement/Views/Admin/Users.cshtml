@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WasteDisposalManagement.Models.User>
+@{
+    ViewData["Title"] = "Users";
+    Layout = "_AdminDashboard";
+}
+
+
+<a href="">Add New Users</a>
+<h1 style="margin-bottom:-10px; margin-top:-2p">Users</h1>
+<div class="dashboard">
+    <section id="main">
+        <div class="board">
+            <table class="table" width="100%">
+                <thead>
+                    <tr>
+                        <td>NAME</td>
+                        <td>TITLE</td>
+                        <td>STATUS</td>
+                        <td>ROLE</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td class="users">
+                                @if(user.ProfilePicture != null)
+                                {
+                                    <img src="@user.ProfilePicture" alt="">
+                                }
+                                <img src="~/images/dummy-profile-pic.jpg" alt="">
+                                <div class="people-de">
+                                    <h5>@user.FirstName @user.LastName</h5>
+                                    <p>@user.Email</p>
+                                </div>
+                            </td>
+
+                            <td class="title">
+                                <h5>Software Engineer</h5>
+                                <p>Web dev</p>
+                            </td>
+
+                            <td class="status">
+                                <p>Active</p>
+                            </td>
+
+                            <td class="role">
+                                <p>Admin</p>
+                            </td>
+
+                            <td class="edit">
+                                <a href="#">Edit</a>
+                            </td>
+
+                            <td class="delete">
+                                <a href="#">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+

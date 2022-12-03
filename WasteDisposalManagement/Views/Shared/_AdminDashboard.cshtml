@@ -17,14 +17,40 @@
 <div class="dashboard">
     <section id="sidebar" class="initial-active hide">
         <div class="logo">
-            <a href="#">
+            <a asp-controller="Home" asp-action="Index">
                 <img src="~/images/interswitch_logo.svg" alt="dashboard logo">
             </a>
         </div>
 
         <div class="items">
-            <li><i class="fa-solid fa-user"></i><a asp-controller="User" asp-action="Profile">Users</a></li>
-            <li><i class="fas fa-cart-plus"></i></i><a href="#">Orders</a></li>
+            <ul>
+                <li>
+                    <i class="fa-solid fa-user"></i>
+                    <a asp-controller="Admin" asp-action="Users">Users</a>
+                </li>
+
+                <li>
+                    <i class="fas fa-cart-plus"></i>
+                    <a asp-controller="Admin" asp-action="Cards">Cards</a>
+                </li>
+
+                <li>
+                    <i class="fas fa-cart-plus"></i>
+                    <a asp-controller="Admin" asp-action="Services">Services</a>
+                </li>
+
+                <li>
+                    <i class="fas fa-cart-plus"></i>
+                    <a asp-controller="Admin" asp-action="Orders">Orders</a>
+                </li>
+
+                <li>
+                    <i class="fas fa-cart-plus"></i>
+                    <a asp-controller="Admin" asp-action="FirstTimeOrders">First Orders</a>
+                </li>
+
+                
+            </ul>
         </div>
     </section>
 
@@ -45,11 +71,11 @@
                 <i class="far fa-bell"></i>
                 @if (user.ProfilePicture != null)
                 {
-                    <a asp-controller="User" asp-action="Profile"><img src="@user.ProfilePicture" alt="user profile image"></a>
+                    <a asp-controller="Admin" asp-action="Dashboard"><img src="@user.ProfilePicture" alt="user profile image"></a>
                 }
                 else
                 {
-                    <a asp-controller="User" asp-action="Profile"><img src="~/images/dummy-profile-pic.jpg" alt="user profile image"></a>
+                    <a asp-controller="Admin" asp-action="Dashboard"><img src="~/images/dummy-profile-pic.jpg" alt="user profile image"></a>
                 }
             </div>
         </div>
@@ -60,7 +86,7 @@
             <div class="card">
                 <i class="fas fa-users"></i>
                 <div class="content">
-                    <h3>8,267</h3>
+                    <h3>0</h3>
                     <span>New users</span>
                 </div>
             </div>
@@ -68,7 +94,7 @@
             <div class="card">
                 <i class="fas fa-cart-plus"></i>
                 <div class="content">
-                    <h3>4,267</h3>
+                    <h3>0</h3>
                     <span>Orders</span>
                 </div>
             </div>
@@ -76,7 +102,7 @@
             <div class="card">
                 <i class="fas fa-check-circle"></i>
                 <div class="content">
-                    <h3>2,267</h3>
+                    <h3>0</h3>
                     <span>Active orders</span>
                 </div>
             </div>
@@ -84,7 +110,7 @@
             <div class="card">
                 <i class="fas fa-users"></i>
                 <div class="content">
-                    <h3>2,000</h3>
+                    <h3>0</h3>
                     <span>Pending orders</span>
                 </div>
             </div>

@@ -8,6 +8,7 @@ namespace WasteDisposalManagement.Models
     {
 
         [Required, MaxLength(50)]
+        [DataType(DataType.Text)]
         public string FirstName { get; set; } = null!;
 
         [Required, MaxLength(50)]

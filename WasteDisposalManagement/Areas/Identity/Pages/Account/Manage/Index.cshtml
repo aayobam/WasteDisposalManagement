@@ -1,29 +1,91 @@
 ﻿@page
 @model IndexModel
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<User> customUserManager
 @{
-    ViewData["Title"] = "Profile";
-    ViewData["ActivePage"] = ManageNavPages.Index;
+    ViewBag.Title = "My Profile";
+    Layout = "_Dashboard";
+    //ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+
+@{
+    var userid = customUserManager.GetUserId(User);
+    var user = await customUserManager.FindByIdAsync(userid);
 }
 
 <h3>@ViewData["Title"]</h3>
-<partial name="_StatusMessage" for="StatusMessage" />
-<div class="row">
-    <div class="col-md-6">
-        <form id="profile-form" method="post">
+@*<partial name="_StatusMessage" for="StatusMessage" />*@
+
+<section class="user-profile">
+    <div class="profile-details-card" style="margin-left: 150px">
+        @if (user.ProfilePicture != null)
+        {
+            <img class="profile-picture" src="@user.ProfilePicture" alt="user profile image">
+        }
+        else
+        {
+            <img class="profile-picture" src="~/images/dummy-profile-pic.jpg" alt="user profile image">
+        }
+
+        <br>
+        <h4>Profile Information</h4><hr>
+        <div class="profile-details">
+            <p><label for="fullname">Full Name:</label> @user.FirstName @user.LastName</p>
+            <p><label for="email">Email:</label> @user.Email</p>
+            <p><label for="email">Phone No:</label> @user.PhoneNumber</p>
+            <p><label for="email">Address:</label> @user.Address</p>
+            <p><label for="email">City:</label> @user.City</p>
+            <p><label for="email">State:</label> @user.State</p>
+        </div><br>
+    </div>
+
+
+    <div class="profile-update">
+        <div class="update-guide">
+            <h4>Update your profile.</h4>
+        </div>
+
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <input asp-for="Username" class="form-control" disabled />
-                <label asp-for="Username" class="form-label"></label>
+
+            <input asp-for="Input.FirstName" id="fname">
+            <span asp-validation-for="Input.FirstName" class="text-danger"></span><br>
+
+
+            <input asp-for="Input.LastName" id="lname">
+            <span asp-validation-for="Input.LastName" class="text-danger"></span><br>
+
+
+            <input asp-for="Input.PhoneNumber" id="phone-no">
+            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span><br>
+
+
+            <input asp-for="Input.Address" id="address">
+            <span asp-validation-for="Input.Address" class="text-danger"></span><br>
+
+
+            <select asp-for="Input.City" id="city">
+                <option asp-for="Input.City" value="Ikotun">Ikotun</option>
+                <option asp-for="Input.City" value="Igando">Igando</option>
+                <option asp-for="Input.City" value="Abaranje">Abaranje</option>
+            </select>
+            <span asp-validation-for="Input.FirstName" class="text-danger"></span><br>
+
+            <select asp-for="Input.State" id="state" disabled="disabled">
+                <option value="Lagos">Lagos</option>
+            </select>
+            <span asp-validation-for="Input.State"></span><br><br>
+
+            <div class="profile-image">
+                <input id="profile-image" type="file" accept=".png, .jpg, .jpeg" src="@user.ProfilePicture." alt="profile image">
+                <span asp-validation-for="Input.ProfilePicture"></span><br>
             </div>
-            <div class="form-floating">
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-                <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-            </div>
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+
+            <input type="submit" value="Update Profile" id="update-btn" name="update-btn">
         </form>
     </div>
-</div>
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

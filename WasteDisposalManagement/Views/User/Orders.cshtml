@@ -1,60 +1,59 @@
 ﻿@model IEnumerable<WasteDisposalManagement.Models.Order>
 @{
-    ViewBag.Title = "Users Lists";
+    ViewData["Title"] = "Orders";
     Layout = "_Dashboard";
 }
 
-<div class="board">
-    <table class="table" width="100%">
-        @if (Model != null)
-        {
-            <thead>
-                <tr>
-                    <td>ID</td>
-                    <td>USERID</td>
-                    <td>STATUS STATUS</td>
-                    <td>PAYMENT STATUS</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </thead>
 
-            <tbody>
-                @foreach (var item in Model)
-                {
+<h1 style="margin-bottom:-10px">Orders</h1>
+<div class="dashboard">
+    <section id="main">
+        <div class="board">
+            <table class="table" width="100%">
+                <thead>
                     <tr>
-                        <td class="users">
-                            <p>@item.OrderId </p>
-                        </td>
+                        <td>ORDER ID</td>
+                        <td>SERVICE NAME</td>
+                        <td>PAYMENT STATUS</td>
+                        <td>ORDER STATUS</td>
+                        <td>REFERENCE NO</td>
 
-                        <td class="status">
-                            <p>@item.UserId</p>
-                        </td>
-
-                        <td class="role">
-                            <p>@item.OrderStatus</p>
-                        </td>
-
-                        <td class="role">
-                            <p>@item.PaymentStatus</p>
-                        </td>
-
-                        <td class="edit">
-                            <a href="#">Edit</a>
-                        </td>
-
-                        <td class="delete">
-                            <a href="#">Delete</a>
-                        </td>
                     </tr>
-                }
-            </tbody>
-        }
-        else
-        {
-            <p>You have no available orders</p>
-        }
+                </thead>
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td class="users">
+                                <p>@order.OrderId</p>
+                            </td>
 
-    </table>
+                            <td class="title">
+                                <p>@order.ServicesName</p>
+                            </td>
+
+                            <td class="status">
+                                <p>@order.PaymentStatus</p>
+                            </td>
+
+                            <td class="role">
+                                <p>@order.ReferenceNo</p>
+                            </td>
+
+                            <td class="role">
+                                <p>@order.StartDate</p>
+                            </td>
+
+                            <td class="edit">
+                                <a href="#">Edit</a>
+                            </td>
+                            <td class="delete">
+                                <a href="#">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
 </div>
-

@@ -12,8 +12,8 @@ using WasteDisposalManagement.Models;
 namespace WasteDisposalManagement.Migrations
 {
     [DbContext(typeof(WasteManagementDbContext))]
-    [Migration("20221123113329_renamestatestostate")]
-    partial class renamestatestostate
+    [Migration("20221201113654_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -165,7 +165,7 @@ namespace WasteDisposalManagement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<decimal?>("CardBalance")
+                    b.Property<decimal>("CardBalance")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("CardNumber")
@@ -183,15 +183,13 @@ namespace WasteDisposalManagement.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
 
-                    b.Property<int?>("Pin")
+                    b.Property<string>("Pin")
                         .IsRequired()
                         .HasMaxLength(4)
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(4)");
 
                     b.Property<string>("UserId1")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -240,10 +238,8 @@ namespace WasteDisposalManagement.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId1")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("OrderId");
@@ -294,10 +290,8 @@ namespace WasteDisposalManagement.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId1")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("OrderId");
@@ -480,7 +474,9 @@ namespace WasteDisposalManagement.Migrations
                 {
                     b.HasOne("WasteDisposalManagement.Models.User", "User")
                         .WithMany("Card")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -495,7 +491,9 @@ namespace WasteDisposalManagement.Migrations
 
                     b.HasOne("WasteDisposalManagement.Models.User", "User")
                         .WithMany("FirstTimeOrder")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ServicesNameNavigation");
 
@@ -512,7 +510,9 @@ namespace WasteDisposalManagement.Migrations
 
                     b.HasOne("WasteDisposalManagement.Models.User", "User")
                         .WithMany("Order")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ServicesNameNavigation");
 

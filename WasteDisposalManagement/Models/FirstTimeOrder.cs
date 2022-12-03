@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WasteDisposalManagement.Models
 {
@@ -7,7 +8,9 @@ namespace WasteDisposalManagement.Models
         [Key]
         public int OrderId { get; set; }
 
-        public int UserId { get; set; }
+
+        [ForeignKey("User")]
+        public string UserId1 { get; set; } = null!;
 
         public string ServicesName { get; set; } = null!;
 

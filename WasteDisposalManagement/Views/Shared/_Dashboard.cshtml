@@ -1,31 +1,34 @@
 ﻿@using Microsoft.AspNetCore.Identity;
-@{
-    ViewBag.Title = "User Dashboard";
-}
-
-@{
-    Layout = "_Base";
-}
-
 @inject UserManager<User> customUserManager
 
 @{
+    Layout = "_Base";
+    ViewBag.Title = "User Dashboard";
     var userid = customUserManager.GetUserId(User);
     var user = await customUserManager.FindByIdAsync(userid);
 }
+
 <!--dashboard container-->
 <div class="dashboard">
     <section id="sidebar" class="initial-active hide">
         <div class="logo">
-            <a href="#">
-                <img src="~/images/interswitch_logo.svg" alt="dashboard logo">
-            </a>
+            <a asp-controller="Home" asp-action="Index"><img src="~/images/interswitch_logo.svg" alt="dashboard logo"></a>
         </div>
 
         <div class="items">
            <ul>
-                <li><i class="fas fa-cart-plus"></i></i><a asp-controller="User" asp-action="Orders">My Orders</a></li>
-                <li><i class="fas fa-cart-plus"></i></i><a asp-controller="User" asp-action="FirstTimeOrders">My First Order</a></li>
+                <li>
+                    <i class="fas fa-cart-plus"></i>
+                    <a asp-controller="User" asp-action="Orders">My Orders</a>
+                </li>
+                <li>
+                    <i class="fas fa-cart-plus"></i>
+                    <a asp-controller="User" asp-action="FirstTimeOrders">First Order</a>
+                </li>
+                <li>
+                    <i class="fas fa-cart-plus"></i>
+                    <a asp-controller="User" asp-action="Cards">My Cards</a>
+                </li>
            </ul>
         </div>
     </section>
@@ -45,13 +48,16 @@
 
             <div class="profile">
                 <i class="far fa-bell"></i>
+                
                 @if(user.ProfilePicture != null)
                 {
-                    <a asp-controller="User" asp-action="Profile"><img src="@user.ProfilePicture" alt="user profile image"></a>
+                    <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index">@user.FirstName @user.LastName </a>
+                    <a asp-area="Identity" asp-page="/Account/Manage/Index"><img src="@user.ProfilePicture" alt="user profile image"></a>
                 }
                 else
                 {
-                    <a asp-controller="User" asp-action="Profile"><img src="~/images/dummy-profile-pic.jpg" alt="user profile image"></a>
+                    <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index">@user.FirstName @user.LastName </a>
+                    <a asp-area="Identity" asp-page="/Account/Manage/Index"><img src="~/images/dummy-profile-pic.jpg" alt="user profile image"></a>
                 }
             </div>
         </div>
@@ -60,17 +66,9 @@
         <div class="cards">
 
             <div class="card">
-                <i class="fas fa-users"></i>
-                <div class="content">
-                    <h3>8,267</h3>
-                    <span>New users</span>
-                </div>
-            </div>
-
-            <div class="card">
                 <i class="fas fa-cart-plus"></i>
                 <div class="content">
-                    <h3>4,267</h3>
+                    <h3>0</h3>
                     <span>Orders</span>
                 </div>
             </div>
@@ -78,7 +76,7 @@
             <div class="card">
                 <i class="fas fa-check-circle"></i>
                 <div class="content">
-                    <h3>2,267</h3>
+                    <h3>0</h3>
                     <span>Active orders</span>
                 </div>
             </div>
@@ -86,7 +84,7 @@
             <div class="card">
                 <i class="fas fa-users"></i>
                 <div class="content">
-                    <h3>2,000</h3>
+                    <h3>0</h3>
                     <span>Pending orders</span>
                 </div>
             </div>

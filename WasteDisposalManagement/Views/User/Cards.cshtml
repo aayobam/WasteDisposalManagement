@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WasteDisposalManagement.Models.Card>
+@{
+    ViewData["Title"] = "Cards";
+    Layout = "_Dashboard";
+}
+
+
+<h1 style="margin-bottom:-10px">My Cards</h1>
+
+<div class="dashboard">
+    <section id="main">
+        <div class="board">
+            <table class="table" width="100%">
+                <thead>
+                    <tr>
+                        <td>CARD NUMBER</td>
+                        <td>EXPIRY DATE</td>
+                        <td>CVV</td>
+                        <td>PIN</td>
+                        <td>CARD BALANCE</td>
+                        <td>CARD STATUS</td>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var card in Model)
+                    {
+                        <tr>
+                            <td class="status">
+                                <p>@card.CardNumber</p>
+                            </td>
+
+                            <td class="status">
+                                <p>@card.Expiry</p>
+                            </td>
+
+                            <td class="status">
+                                <p>@card.Cvv</p>
+                            </td>
+
+                            <td class="status">
+                                <p>@card.Pin</p>
+                            </td>
+
+                            <td class="status">
+                                <p>#@card.CardBalance</p>
+                            </td>
+
+                            <td class="edit">
+                                <p>Active</p>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
