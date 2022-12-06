@@ -1,12 +1,13 @@
-﻿@model WasteDisposalManagement.Models.Service
-@using Microsoft.AspNetCore.Identity;
+﻿@model WasteDisposalManagement.ViewModels.PaymentModel
+@*@model ViewModel*@
+@*@using Microsoft.AspNetCore.Identity;
 @inject UserManager<User> customUserManager
 
 
 @{
     var userid = customUserManager.GetUserId(User);
     var user = await customUserManager.FindByIdAsync(userid);
-}
+}*@
 
 @{
     Layout = "_Base";
@@ -18,7 +19,7 @@
     <div class="head">
         <img src="~/images/interswitch_logo.svg" alt="an image here" srcset="">
         <div class="order-data">
-            <p>@Model.Name</p>
+            <p>@Model.Id</p>
         </div>
     </div>
     <hr>
@@ -28,18 +29,23 @@
     </div>
 
     <form asp-controller="Order" asp-action="Detail" method="post" enctype="multipart/form-data">
-        <input type="hidden" value="@Model.ServiceId">
-        <input type="text" id="card-number" placeholder="Card Number">
+        <input asp-for="@Model.Id" hidden>
+
+        <input asp-for="@Model.Price" hidden>
+
+        <input asp-for="@Model.DurationInDays" hidden>
+
+        <input asp-for="@Model.CardNumber" id="card-number" placeholder="Card Number">
         <span></span><br>
         
 
-        <input type="text" name="expiry-date" id="expiry-date" placeholder="Expiry date (MM / YY)">
+        <input asp-for="@Model.Expiry" id="expiry-date" placeholder="Expiry date (MM / YY)">
         <span></span><br>
 
-        <input type="text" name="cvv" id="cvv" placeholder="CVV">
+        <input asp-for="@Model.Cvv" id="cvv" placeholder="CVV">
         <span></span><br>
 
-        <input type="text" name="cvv" id="cvv" placeholder="PIN">
+        <input asp-for="@Model.Pin" id="pin" placeholder="PIN">
         <span></span><br>
 
         <input type="submit" id="payment-btn" value="Make Payment"><br>

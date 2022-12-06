@@ -17,6 +17,8 @@
                         <td>PAYMENT STATUS</td>
                         <td>ORDER STATUS</td>
                         <td>REFERENCE NO</td>
+                        <td>START DATE</td>
+                        <td>END DATE</td>
 
                     </tr>
                 </thead>
@@ -29,11 +31,15 @@
                             </td>
 
                             <td class="title">
-                                <p>@order.ServicesName</p>
+                                <p>@order.Services.Name</p>
                             </td>
 
                             <td class="status">
                                 <p>@order.PaymentStatus</p>
+                            </td>
+
+                            <td class="status">
+                                <p>@order.OrderStatus</p>
                             </td>
 
                             <td class="role">
@@ -44,11 +50,8 @@
                                 <p>@order.StartDate</p>
                             </td>
 
-                            <td class="edit">
-                                <a href="#">Edit</a>
-                            </td>
-                            <td class="delete">
-                                <a href="#">Delete</a>
+                            <td class="role">
+                                <p>@order.EndDate</p>
                             </td>
                         </tr>
                     }

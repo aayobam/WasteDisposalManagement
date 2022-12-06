@@ -30,7 +30,7 @@ namespace WasteDisposalManagement.Models
 
         public virtual ICollection<Card> Card { get; } = new List<Card>();
 
-        public virtual ICollection<FirstTimeOrder> FirstTimeOrder { get; } = new List<FirstTimeOrder>();
+        public virtual ICollection<FirstTimeOrder> FirstTimeOrder { get;} = new List<FirstTimeOrder>();
 
         public virtual ICollection<Order> Order { get; } = new List<Order>();
     }

@@ -1,0 +1,64 @@
+﻿@model WasteDisposalManagement.Models.Card
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_Base";
+}
+
+<div class="debit-card">
+    <div class="column1">
+        <div class="card-guide" style="margin-top:100px">
+            <h4>Create Card</h4>
+        </div>
+
+        <form asp-controller="Cards" asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" id="email-label"></div>
+
+            <div class="form-group">
+                <input asp-for="CardNumber" id="card-number" placeholder="Card number"/>
+                <span asp-validation-for="CardNumber" id="email-label"></span>
+            </div>
+
+            <div class="form-group">
+               
+                <input asp-for="Cvv" id="cvv" placeholder="cvv"/>
+                <span asp-validation-for="Cvv" id="email-label"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="Expiry" id="expiry-date" placeholder="12/22"/>
+                <span asp-validation-for="Expiry" id="email-label"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="Pin" id="pin" placeholder="pin"/>
+                <span asp-validation-for="Pin" id="email-label"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="CardBalance" id="card-balance" placeholder="00.00"/>
+                <span asp-validation-for="CardBalance" id="email-label"></span>
+            </div>
+
+            <div class="form-group">
+                <select asp-for="UserId1" id="users" asp-items="ViewBag.UserId1"></select>
+                <span asp-validation-for="UserId1" id="email-label"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create Card" id="create-button" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+@*@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}*@

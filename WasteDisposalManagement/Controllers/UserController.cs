@@ -19,24 +19,23 @@ namespace WasteDisposalManagement.Controllers
             _userManager = userManager;
         }
 
-
         public IActionResult Dashboard()
         {
-            return View("Orders");
+            return RedirectToAction("Orders");
         }
 
         [Authorize]
         public IActionResult Orders()
         {
-            IEnumerable<Order> orderList = _context.Orders.ToList();
-            return View(orderList);
+            IEnumerable<Order> orders = _context.Orders.Include(s => s.Services).ToList();
+            return View(orders);
         }
 
         [Authorize]
         public IActionResult FirstTimeOrders()
         {
-            IEnumerable<FirstTimeOrder> orderList = _context.FirstTimeOrders.ToList();
-            return View(orderList);
+            IEnumerable<FirstTimeOrder> firstTimeOrders = _context.FirstTimeOrders.ToList();
+            return View(firstTimeOrders);
         }
 
         public async Task<IActionResult> Cards()

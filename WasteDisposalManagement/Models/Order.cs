@@ -12,7 +12,9 @@ namespace WasteDisposalManagement.Models
 
         [ForeignKey("User")]
         public string UserId1 { get; set; } = null!;
-        public string ServicesName { get; set; } = null!;
+       
+        [ForeignKey("Services")]
+        public int ServiceId { get; set; }
 
         public decimal? Amount { get; set; }
 
@@ -28,7 +30,7 @@ namespace WasteDisposalManagement.Models
 
         public DateTime EndDate { get; set; }
 
-        public virtual Service ServicesNameNavigation { get; set; } = null!;
+        public virtual Service Services { get; set; } = null!;
 
         public virtual User User { get; set; } = null!;
     }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WasteDisposalManagement.Models;
 
@@ -11,9 +12,10 @@ using WasteDisposalManagement.Models;
 namespace WasteDisposalManagement.Migrations
 {
     [DbContext(typeof(WasteManagementDbContext))]
-    partial class WasteManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221206060101_changedservicenametoserviceID")]
+    partial class changedservicenametoserviceID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -226,7 +228,11 @@ namespace WasteDisposalManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ServiceId")
+                    b.Property<string>("ServicesName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ServicesNameNavigationServiceId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
@@ -238,7 +244,7 @@ namespace WasteDisposalManagement.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("ServiceId");
+                    b.HasIndex("ServicesNameNavigationServiceId");
 
                     b.HasIndex("UserId1");
 
@@ -473,9 +479,9 @@ namespace WasteDisposalManagement.Migrations
 
             modelBuilder.Entity("WasteDisposalManagement.Models.FirstTimeOrder", b =>
                 {
-                    b.HasOne("WasteDisposalManagement.Models.Service", "Services")
+                    b.HasOne("WasteDisposalManagement.Models.Service", "ServicesNameNavigation")
                         .WithMany("FirstTimeOrders")
-                        .HasForeignKey("ServiceId")
+                        .HasForeignKey("ServicesNameNavigationServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -485,7 +491,7 @@ namespace WasteDisposalManagement.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Services");
+                    b.Navigation("ServicesNameNavigation");
 
                     b.Navigation("User");
                 });

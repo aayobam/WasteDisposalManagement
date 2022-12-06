@@ -23,4 +23,5 @@ public class WasteManagementDbContext : IdentityDbContext<User>
 
     public DbSet<Service> Services { get; set; } = null!;
     public IEnumerable<User> Users { get; set; } = null!;
+    public object Card { get; internal set; }
 }

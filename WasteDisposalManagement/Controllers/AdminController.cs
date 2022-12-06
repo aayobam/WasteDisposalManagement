@@ -49,11 +49,9 @@ namespace WasteDisposalManagement.Controllers
         public IActionResult Cards()
         {
             
-            //var userid = _userManager.GetUserId(User);
-            //var user = await _userManager.FindByIdAsync(userid);
+    
             Console.ReadLine();
-            /*IEnumerable<Card> cardObj = _context.Cards.Include(u => u.User).Where(x=>x.UserId1==userid).ToList();*/
-            IEnumerable<Card> cardObj = _context.Cards.ToList();
+            IEnumerable<Card> cardObj = _context.Cards.Include(u=>u.User);
             return View(cardObj);
         }
     }

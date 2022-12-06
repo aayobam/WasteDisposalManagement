@@ -16,7 +16,29 @@
     --sidebar-color: #3b8a8c;
 }
 /* Variables end */
+/* begining of alert style*/
 
+.alert-success{
+    background: green;
+    padding: 1rem;
+    text-align:center;
+    color:ghostwhite;
+}
+
+.alert-danger {
+    background: red;
+    padding: 1rem;
+    text-align: center;
+    color: ghostwhite;
+}
+
+.alert-info {
+    background: orange;
+    padding: 1rem;
+    text-align: center;
+    color: ghostwhite;
+}
+/* end of alert style */
 * {
     margin: 0;
     padding: 0;
@@ -379,6 +401,7 @@ nav {
     .register .column2 {
         width: 45%;
         padding: 2em;
+        margin-top: 30px;
     }
 
 .column2 .reg-guide {
@@ -421,6 +444,7 @@ form #register-btn {
     background-color: #38CC8C;
     color: white;
     border: none;
+    cursor:pointer;
     border-radius: 5px;
     margin-bottom: 10px;
 }
@@ -485,7 +509,6 @@ form #login-email, #login-password, #login-btn {
     margin: 10px;
     font-weight: 700px;
     border: 1px solid #3E3C49;
-    ;
 }
 
     form #login-email:hover, #login-password:hover {
@@ -582,7 +605,6 @@ form #fname, #lname, #phone-no, #address, #state, #city, #update-btn, #profile-i
     margin: 10px;
     font-weight: 700px;
     border: 1px solid #3E3C49;
-    ;
 }
 
     form #fname:hover, #lname:hover, #phone-no:hover, #address:hover, #state, #city:hover {
@@ -623,9 +645,9 @@ form #update-btn {
         display: flex;
     }
 
-        .user-profile .profile-details-card {
-            margin-top: -150px;
-        }
+    .user-profile .profile-details-card {
+        margin-top: -150px;
+    }
 }
 
 @media only screen and (max-width:700px) {
@@ -633,14 +655,14 @@ form #update-btn {
         flex-direction: column;
     }
 
-        .user-profile .profile-details-card {
-            margin-top: 20px;
-            width: 80%;
-        }
+    .user-profile .profile-details-card {
+        margin-top: 20px;
+        width: 80%;
+    }
 
-        .user-profile .profile-update {
-            width: 90%;
-        }
+    .user-profile .profile-update {
+        width: 90%;
+    }
 }
 
 @media only screen and (max-width:450px) {
@@ -1173,17 +1195,17 @@ tbody tr td {
     margin-bottom: -90px;
 }
 
-    .service-order-cards .service-card {
-        display: flex;
-        padding: 0.5rem;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 70%;
-        width: 23%;
-        border: 3px solid var(--primary-color);
-        border-radius: 10px;
-    }
+.service-order-cards .service-card {
+    display: flex;
+    padding: 0.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+    width: 23%;
+    border: 3px solid var(--primary-color);
+    border-radius: 10px;
+}
 
 .service-card h1 {
     color: Black;
@@ -1213,14 +1235,81 @@ tbody tr td {
 /* end of order style*/
 
 
-/* start of order style */
+/*start of debit card style */
+debit-card {
+    width: 60%;
+    margin: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
+.debit-card .column1 {
+    width: 50%;
+    padding: 2em;
+    margin-top: -100px;
+}
+
+.column1 .card-guide {
+    margin-top: 100px;
+    text-align: center;
+    background-color: #6055A5;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    color: var(--primary-white);
+}
+
+.debit-card form {
+    background-color: var(--alice-blue);
+    border-radius: 5px;
+    padding: 2em;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+form #card-numnber, #expiry-date, #cvv, #pin, #card-balance, #users, #create-button {
+    width: 100%;
+    padding: 1em;
+    border-radius: 5px;
+    margin: 10px;
+    font-weight: 700px;
+    border: 1px solid #3E3C49;
+}
+
+form #card-numnber:hover, #expiry-date:hover, #cvv:hover, #pin:hover, #card-balance:hover, #users:hover {
+    border-color: #3E3C49;
+}
+
+form #create-button {
+    width: 100%;
+    padding: 1em;
+    background-color: #38CC8C;
+    color: white;
+    border: none;
+    cursor:pointer;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.display-none {
+    display: none;
+}
+
+form #create-button:hover {
+    background-color: #6055A5;
+}
+/* end of debit card style */
+
+/* start of order style */
 .order-container {
     display: flex;
     border-radius: 10px;
     padding: 1rem;
     flex-direction: column;
-    height: 60vh;
+    height: 90vh;
     width: 30%;
     margin: 0 auto;
     margin-top: 30px;
@@ -1261,13 +1350,11 @@ tbody tr td {
 
 form #card-number, #expiry-date, #cvv, #payment-btn {
     width: 100%;
-    display: flex;
-    gap: 2px;
-    padding: 8px 75px;
+    padding: 1em;
     border-radius: 5px;
-    text-align: center;
-    justify-content: center;
-    border: 2px solid var(--primary-shadow)
+    margin: 10px;
+    font-weight: 700px;
+    border: 1px solid #3E3C49;
 }
 
     form #card-number:hover, #expiry-date:hover, #cvv:hover {
@@ -1280,12 +1367,12 @@ form #payment-btn {
     border: none;
 }
 
-    form #payment-btn:hover {
-        background: var(--primary-color);
-        color: var(--primary-white);
-        text-align: center;
-        cursor: pointer;
-    }
+form #payment-btn:hover {
+    background: var(--primary-color);
+    color: var(--primary-white);
+    text-align: center;
+    cursor: pointer;
+}
 
 
 @media only screen and (max-width:846px) {
@@ -1299,9 +1386,9 @@ form #payment-btn {
         width: 45%;
     }
 
-        .order-container form {
-            text-align: left;
-        }
+    .order-container form {
+        text-align: left;
+    }
 }
 
 @media only screen and (max-width:570px) {
