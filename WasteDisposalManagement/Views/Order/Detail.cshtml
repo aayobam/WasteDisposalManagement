@@ -1,25 +1,28 @@
 ﻿@model WasteDisposalManagement.ViewModels.PaymentModel
-@*@model ViewModel*@
-@*@using Microsoft.AspNetCore.Identity;
-@inject UserManager<User> customUserManager
-
-
-@{
-    var userid = customUserManager.GetUserId(User);
-    var user = await customUserManager.FindByIdAsync(userid);
-}*@
 
 @{
     Layout = "_Base";
 }
 
 
-<div class="email-label">@ViewBag.message</div>
+@if (ViewBag.status == true)
+{
+    <div class="alert-success">
+        <h1>@ViewBag.message</h1>
+    </div>
+}
+else
+{
+    <div class="alert-info">
+        <h1>@ViewBag.message</h1>
+    </div>
+}
+
 <div class="order-container">
     <div class="head">
         <img src="~/images/interswitch_logo.svg" alt="an image here" srcset="">
         <div class="order-data">
-            <p>@Model.Id</p>
+            <p>@Model.Name</p>
         </div>
     </div>
     <hr>
@@ -29,24 +32,24 @@
     </div>
 
     <form asp-controller="Order" asp-action="Detail" method="post" enctype="multipart/form-data">
-        <input asp-for="@Model.Id" hidden>
+        <input asp-for="@Model.Name" hidden>
 
         <input asp-for="@Model.Price" hidden>
 
         <input asp-for="@Model.DurationInDays" hidden>
 
         <input asp-for="@Model.CardNumber" id="card-number" placeholder="Card Number">
-        <span></span><br>
+        <span asp-validation-for="CardNumber" id="email-label"></span><br>
         
 
         <input asp-for="@Model.Expiry" id="expiry-date" placeholder="Expiry date (MM / YY)">
-        <span></span><br>
+        <span asp-validation-for="Expiry" id="email-label"></span><br>
 
         <input asp-for="@Model.Cvv" id="cvv" placeholder="CVV">
-        <span></span><br>
+        <span asp-validation-for="Cvv" id="email-label"></span><br>
 
         <input asp-for="@Model.Pin" id="pin" placeholder="PIN">
-        <span></span><br>
+        <span asp-validation-for="Pin" id="email-label"></span><br>
 
         <input type="submit" id="payment-btn" value="Make Payment"><br>
     </form>

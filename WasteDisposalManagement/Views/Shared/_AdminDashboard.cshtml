@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity;
+@using WasteDisposalManagement.ViewModels;
+@model AdminItemsModel;
 @{
     ViewBag.Title = "Admin Dashboard";
 }
@@ -86,7 +88,7 @@
             <div class="card">
                 <i class="fas fa-users"></i>
                 <div class="content">
-                    <h3>0</h3>
+                    <h3>@Model.totalUsers</h3>
                     <span>New users</span>
                 </div>
             </div>
@@ -94,7 +96,7 @@
             <div class="card">
                 <i class="fas fa-cart-plus"></i>
                 <div class="content">
-                    <h3>0</h3>
+                    <h3>@Model.totalOrders</h3>
                     <span>Orders</span>
                 </div>
             </div>
@@ -102,7 +104,7 @@
             <div class="card">
                 <i class="fas fa-check-circle"></i>
                 <div class="content">
-                    <h3>0</h3>
+                    <h3>@Model.ActiveOrders</h3>
                     <span>Active orders</span>
                 </div>
             </div>
@@ -110,7 +112,7 @@
             <div class="card">
                 <i class="fas fa-users"></i>
                 <div class="content">
-                    <h3>0</h3>
+                    <h3>@Model.pendingOrders</h3>
                     <span>Pending orders</span>
                 </div>
             </div>

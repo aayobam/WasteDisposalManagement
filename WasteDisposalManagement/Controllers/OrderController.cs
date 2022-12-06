@@ -39,7 +39,7 @@ namespace WasteDisposalManagement.Controllers
                 return NotFound();
             }
             var payments = new PaymentModel { 
-                Id = serviceObj.ServiceId,
+                Name = serviceObj.Name,
                 Price = serviceObj.Price.Value,
                 DurationInDays = serviceObj.DurationInDays
             };
@@ -65,15 +65,28 @@ namespace WasteDisposalManagement.Controllers
                     && x.Expiry == paymentObj.Expiry
                     && x.Cvv == paymentObj.Cvv
                     && x.Pin == paymentObj.Pin
+                    && x.UserId1 == userId
                     );
+                bool result = ValidCardDetail.Any();
 
                 if (ValidCardDetail != null)
                 {
+                    if (!result)
+                    {
+                        ViewBag.Message = "This card doesn't exist in your name, please try a card that carries your name";
+                        return RedirectToAction("Detail");
+                    }
+                    var existingRecord = _context.FirstTimeOrders.Where(u => u.UserId1 == userId).FirstOrDefault();
+                    if(existingRecord == null) {
+                        ViewBag.Message = "You have not subscribed for your waste bins yet please select the 'First Time Subscriber Plan'";
+                        return RedirectToAction("Service");
+                    };
+                    
                     Order orderObj = new Order()
                     {
                         ServiceId = paymentObj.Id,
                         Amount = paymentObj.Price,
-                        PaymentStatus = "Active",
+                        PaymentStatus = "Success",
                         OrderStatus = "Active",
                         ReferenceNo = referenceNo,
                         EndDate = DateTime.Now.AddDays(paymentObj.DurationInDays),
@@ -81,18 +94,15 @@ namespace WasteDisposalManagement.Controllers
                     };
                     _context.Orders.Add(orderObj);
                     _context.SaveChanges();
-                    return RedirectToAction("PaymentSuccess");
+                    ViewBag.Message = "order successfully placed";
+                    return RedirectToAction("Dashboard", "User");
                 }
-                ViewBag.message = "Invalid card details, ensure your detail matches the card detail and try again.";
+                
+                ViewBag.Message = "Invalid card details, ensure your detail matches the card detail and try again.";
                 return RedirectToAction("PaymentFailure");
             }
             return View(paymentObj);
         }
-
-        /*private IEnumerable<Card> GetCards()
-        {
-            throw new NotImplementedException();
-        }*/
 
         [Authorize]
         public IActionResult PaymentSuccess()

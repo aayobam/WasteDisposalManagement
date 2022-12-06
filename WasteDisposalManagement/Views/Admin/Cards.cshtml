@@ -12,6 +12,7 @@
             <table class="table" width="100%">
                 <thead>
                     <tr>
+                        <td>USER EMAIL</td>
                         <td>CARD NUMBER</td>
                         <td>EXPIRY DATE</td>
                         <td>CVV</td>
@@ -28,6 +29,10 @@
                         {
                             <tr>
                                 <td class="users">
+                                    <p>@card.User.Email</p>
+                                </td>
+
+                                <td class="">
                                     <p>@card.CardNumber</p>
                                 </td>
 
@@ -44,11 +49,18 @@
                                 </td>
 
                                 <td class="role">
-                                    <p>#@card.CardBalance</p>
+                                    <p>₦@card.CardBalance</p>
                                 </td>
 
                                 <td class="edit">
                                     <p>Active</p>
+                                </td>
+
+                                <td class="edit">
+                                    <a asp-controller="Cards" asp-action="Edit" asp-route-id="@card.Id">Edit</a>
+                                </td>
+                                <td class="delete">
+                                    <a asp-controller="Cards" asp-action="Delete" asp-route-id="@card.Id">Delete</a>
                                 </td>
                             </tr>
                         }

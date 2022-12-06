@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using WasteDisposalManagement.Models;
+using WasteDisposalManagement.ViewModels;
 
 namespace WasteDisposalManagement.Controllers
 {
@@ -19,7 +21,14 @@ namespace WasteDisposalManagement.Controllers
         [Authorize]
         public IActionResult Dashboard()
         {
-            return RedirectToAction("Users");
+            var dashboardItems = new AdminItemsModel
+            {
+                totalOrders = _context.Orders.Count(),
+                totalUsers = _context.Users.Count(),
+                ActiveOrders = _context.Orders.Where(x => x.OrderStatus == "Active").Count(),
+                pendingOrders = _context.Orders.Where(x => x.OrderStatus == "Pending").Count()
+            };
+            return View(dashboardItems);
         }
 
         public IActionResult Users()
@@ -46,13 +55,9 @@ namespace WasteDisposalManagement.Controllers
             return View(firstTimeOrderObj);
         }
 
-        public IActionResult Cards()
-        {
-            
-    
-            Console.ReadLine();
-            IEnumerable<Card> cardObj = _context.Cards.Include(u=>u.User);
-            return View(cardObj);
+        public IActionResult Cards(){
+            IEnumerable<Card> cards = _context.Cards.Include(c => c.User).ToList();
+            return View(cards);
         }
     }
 }
